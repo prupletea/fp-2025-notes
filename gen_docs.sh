@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-
 stack exec -- haddock \
     --hyperlinked-source \
     --quickjump \
@@ -8,8 +7,11 @@ stack exec -- haddock \
     src/Lessons/Lesson02.hs \
     src/Lessons/Lesson03.hs \
     src/Lessons/Lesson04.hs \
+    src/Lessons/Lesson05.hs \
     src/Lessons/Lesson06.hs \
     src/Lessons/Lesson07.hs \
     src/Lessons/Lesson08.hs \
     src/Lessons/Lesson09.hs \
-    src/Lessons/Lesson11.hs
+    src/Lessons/Lesson10.hs \
+    src/Lessons/Lesson11.hs \
+    src/Lessons/Lesson12.hs \

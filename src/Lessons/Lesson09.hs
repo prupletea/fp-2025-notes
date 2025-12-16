@@ -1,5 +1,6 @@
 {-# LANGUAGE InstanceSigs #-}
 {-# OPTIONS_GHC -Wno-orphans #-}
+-- Notes taken by Julija Mikeliūnaitė
 module Lessons.Lesson09 where
 
 import Lessons.Lesson08(Parser(..), threeLetters)

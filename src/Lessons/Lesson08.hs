@@ -10,50 +10,50 @@ import Control.Applicative
 
 -- | Monad is the most powerful class. 
 -- Bind method (>>=) gives the illusion of sequential computation.
-
+--
 -- Functors ignore the order of execution.
-
+--
 -- | Minimal implementation of a functor:
 -- fmap :: Functor f => (a -> b) -> f a -> f b
 -- It takes a pure function (which takes a and returns b), a functor of a, and returns a functor of b.
 
-
+-- | The function was applied to every element of the list.
+--
 -- >>> fl
 -- [5,4]
 fl :: [Int]
 fl = fmap length ["labas", "medi"]
--- The function was applied to every element of the list.
 
+-- | If the list is empty, the result is also an empty list.
+--
 -- >>> fm
 -- Nothing
 fm :: Maybe Integer
 fm = fmap (+1) Nothing
--- If the list is empty, the result is also an empty list.
 
 -- >>> fe
 -- Right 42
 fe :: Either String Integer
 fe = fmap (+1) $ Right 41
 
+-- | The left value is considered a "bad" value.
+--
 -- >>> fe'
 -- Left 41
 fe' :: Either Integer Integer
 fe' = fmap (+1) $ Left 41
--- The left value is considered a "bad" value.
 
+-- | Takes an input and returns the value with "!"" in the end. Returned type is IO String. IO is a type which presents computations which originate in the external world.
+--
 fio :: IO String
 fio = fmap (\a -> a ++ "!") getLine
--- Takes an input and returns the value with "!"" in the end.
--- Returned type is IO String.
 
--- IO is a type which presents computations which originate in the external world.
-
--- Applicative functor is between functor and monad.
+-- | Applicative functor is between functor and monad.
 
 -- | pure is pretty much the same as return:
 -- pure :: Applicative f => a -> f a
 -- return :: Monad m => a -> m a
-
+--
 -- >>> p
 -- [5]
 p :: [Integer]
@@ -63,8 +63,8 @@ p = pure 5
 -- (<*>) :: Applicative f => (a -> b) -> f a -> f b
 -- It is similar to fmap, but instead of a Functor, it uses an Applicative.
 
--- Signature <$> is synonymous with fmap.
-
+-- | Signature <$> is synonymous with fmap.
+--
 -- >>> am
 -- Just 46
 am :: Maybe Integer
@@ -89,11 +89,15 @@ am'' = (\a b c -> a + b + c) <$> (Just 5) <*> Nothing <*> (Just 1)
 -- >>> :t fmap (\a b c -> a + b + c)
 -- fmap (\a b c -> a + b + c) :: (Functor f, Num a) => f a -> f (a -> a -> a)
 
+-- | Sources of values are completely independent, computed in parallel.
+--
 -- >>> al
 -- [2,3,3,4,4,5]
 al :: [Integer]
 al = (+) <$> [1,2,3] <*> [1, 2]
 
+-- | Sources of values depend on values that are above, line-by-line.
+--
 -- >>> ml
 -- [2,3,3,4,4,5]
 ml :: [Integer]
@@ -102,16 +106,14 @@ ml = do
     b <- [1, 2]
     pure $ a + b
 
--- | al' and ml are basically the same thing:
--- In al, sources of values are completely independent, computed in parallel.
--- In ml, they depend on values that are above, line-by-line.
-
-
--- newtype is used if ADT has a single constructor.
+-- | newtype is used if ADT has a single constructor.
+--
 newtype Parser a = Parser {
     runParser :: String -> Either String (a, String)
 }
 
+-- | If a number is parsed, then it returns Left value.
+--
 -- >>> runParser parseLetter "skfhsdk"
 -- Right ('s',"kfhsdk")
 parseLetter :: Parser Char
@@ -120,7 +122,6 @@ parseLetter = Parser $ \case
     (h:t) -> if isAlpha h
         then Right (h, t)
         else Left $ "A letter is expected, but got " ++ [h]
--- If a number is parsed, then it returns Left value.
 
 instance Functor Parser where
   fmap :: (a -> b) -> Parser a -> Parser b
@@ -149,7 +150,6 @@ instance Applicative Parser where
 threeLetters :: Parser String
 threeLetters = (\a b c -> [a, b, c]) <$> parseLetter <*> parseLetter <*> parseLetter
 
--- | Signature <|>, sometimes called 'alternative'
 -- >>> (Just 5) <|> (Just 6)
 -- Just 5
 -- >>> Nothing <|> (Just 6)
@@ -158,6 +158,8 @@ threeLetters = (\a b c -> [a, b, c]) <$> parseLetter <*> parseLetter <*> parseLe
 -- >>> [] <|> [] <|> [1,2,3]
 -- [1,2,3]
 
+-- | Signature <|>, sometimes called 'alternative'
+-- 
 instance Alternative Parser where
   empty :: Parser a
   empty = Parser $ \_ -> Left "No alternatives"

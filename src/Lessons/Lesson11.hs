@@ -1,8 +1,8 @@
 {-# LANGUAGE GADTs #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE InstanceSigs #-}
-
-module Lessons.Lesson11 (Expr(..), eval) where
+-- Notes taken by Julija Mikeliūnaitė
+module Lessons.Lesson11 where
 
 import Control.Exception
 import Control.DeepSeq

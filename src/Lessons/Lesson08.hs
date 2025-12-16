@@ -2,7 +2,8 @@
 {-# LANGUAGE InstanceSigs #-}
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 {-# HLINT ignore "Use lambda-case" #-}
-module Lessons.Lesson08 (fio, Parser(..), threeLetters) where
+-- Notes taken by Julija Mikeliūnaitė
+module Lessons.Lesson08 where
 
 import Data.Char
 import Control.Applicative

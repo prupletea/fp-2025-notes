@@ -2,7 +2,7 @@
 {-# LANGUAGE InstanceSigs #-}
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 {-# HLINT ignore "Use lambda-case" #-}
--- Notes taken by Julija Mikeliūnaitė
+-- | Notes taken by Julija Mikeliūnaitė
 module Lessons.Lesson08 where
 
 import Data.Char

@@ -1,7 +1,7 @@
 {-# LANGUAGE GADTs #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE InstanceSigs #-}
--- Notes taken by Julija Mikeliūnaitė
+-- | Notes taken by Julija Mikeliūnaitė
 module Lessons.Lesson11 where
 
 import Control.Exception
